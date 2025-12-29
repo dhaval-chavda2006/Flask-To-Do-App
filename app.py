@@ -14,11 +14,13 @@ class Todo(db.Model):
     desc= db.Column(db.String(500), nullable=False)
     date_created= db.Column(db.DateTime,default=datetime.utcnow)
 
-with app.app_context():
-    db.create_all()
-
     def __repr__(self):
         return f"{self.sno}-{self.title}"
+
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 
 @app.route("/",methods=['GET','POST'])
