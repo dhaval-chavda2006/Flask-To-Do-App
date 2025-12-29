@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////instance/todo.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -62,6 +62,6 @@ def delete(sno):
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run() 
 
 
