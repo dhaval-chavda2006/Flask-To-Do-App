@@ -7,8 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////instance/todo.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-with app.app_context():
-    db.create_all()
+
 
 
 class Todo(db.Model):
@@ -16,6 +15,9 @@ class Todo(db.Model):
     title= db.Column(db.String(200), nullable=False)
     desc= db.Column(db.String(500), nullable=False)
     date_created= db.Column(db.DateTime,default=datetime.utcnow)
+
+with app.app_context():
+    db.create_all()
 
     def __repr__(self):
         return f"{self.sno}-{self.title}"
