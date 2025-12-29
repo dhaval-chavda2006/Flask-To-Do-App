@@ -7,6 +7,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////instance/todo.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
+
 
 class Todo(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
@@ -18,8 +21,6 @@ class Todo(db.Model):
         return f"{self.sno}-{self.title}"
 
 
-with app.app_context():
-    db.create_all()
 
 
 @app.route("/",methods=['GET','POST'])
