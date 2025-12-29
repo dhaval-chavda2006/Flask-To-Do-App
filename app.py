@@ -18,8 +18,7 @@ class Todo(db.Model):
         return f"{self.sno}-{self.title}"
 
 
-@app.before_first_request
-def create_tables():
+with app.app_context():
     db.create_all()
 
 
@@ -63,6 +62,6 @@ def delete(sno):
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run() 
+    app.run(debug=True) 
 
 
